@@ -1,0 +1,186 @@
+[gd_scene load_steps=10 format=3 uid="uid://bxlr3c3ub6q1j"]
+
+[ext_resource type="Script" path="res://scripts/player/main_character.gd" id="1_yigpu"]
+[ext_resource type="Texture2D" uid="uid://duxktu2af2sj7" path="res://assets/kenney_platformer-characters/Adventurer/adventurer_tilesheet.png" id="2_ah44x"]
+[ext_resource type="Texture2D" uid="uid://d0cnwrka7wa6q" path="res://assets/kenney_platformer-characters/Player/player_tilesheet.png" id="3_hfk6h"]
+[ext_resource type="Texture2D" uid="uid://cyqcc2pire8d0" path="res://assets/kenney_platformer-characters/Soldier/soldier_tilesheet.png" id="4_2hy7c"]
+
+[sub_resource type="Animation" id="Animation_d2bja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteGroup2D/Edward:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteGroup2D/Miguel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [23]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteGroup2D/Paolo:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_p55g0"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteGroup2D/Edward:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00999999, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 23]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteGroup2D/Miguel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 23]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteGroup2D/Paolo:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 23]
+}
+
+[sub_resource type="Animation" id="Animation_3xgfp"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteGroup2D/Edward:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpriteGroup2D/Miguel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpriteGroup2D/Paolo:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iwxq4"]
+_data = {
+"RESET": SubResource("Animation_d2bja"),
+"idle": SubResource("Animation_p55g0"),
+"walk": SubResource("Animation_3xgfp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3nu7"]
+size = Vector2(62, 76)
+
+[node name="mainCharacter2D" type="CharacterBody2D"]
+script = ExtResource("1_yigpu")
+
+[node name="SpriteGroup2D" type="Node2D" parent="."]
+
+[node name="Edward" type="Sprite2D" parent="SpriteGroup2D"]
+visible = false
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ah44x")
+hframes = 9
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteGroup2D/Edward"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_iwxq4")
+}
+
+[node name="Miguel" type="Sprite2D" parent="SpriteGroup2D"]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_hfk6h")
+hframes = 9
+vframes = 3
+frame = 23
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="SpriteGroup2D/Miguel"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_iwxq4")
+}
+
+[node name="Paolo" type="Sprite2D" parent="SpriteGroup2D"]
+position = Vector2(0, -8)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_2hy7c")
+hframes = 9
+vframes = 3
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="SpriteGroup2D/Paolo"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_iwxq4")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_e3nu7")
