@@ -8,3 +8,6 @@ extends Camera2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	global_position = player.global_position
+
+func _ready():
+	limit_left = -32  # Límite izquierdo
