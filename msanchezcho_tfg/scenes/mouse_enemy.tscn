@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjlnyt6y608ne"]
+
+[ext_resource type="Texture2D" uid="uid://d1bkkvq41irna" path="res://assets/Enemigos/mouse/mouse.png" id="1_myb6x"]
+[ext_resource type="Texture2D" uid="uid://6genkarxsq8o" path="res://assets/Enemigos/mouse/mouse_move.png" id="2_6omt1"]
+[ext_resource type="Script" path="res://scripts/enemy_mouse.gd" id="3_dxoy0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sc10u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_myb6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6omt1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ms2ag"]
+size = Vector2(41, 21)
+
+[node name="mouseEnemy" type="CharacterBody2D" groups=["group_enemies"]]
+collision_layer = 8
+collision_mask = 43
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2.38419e-07, -22)
+scale = Vector2(0.498047, 0.498047)
+sprite_frames = SubResource("SpriteFrames_sc10u")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.434618
+script = ExtResource("3_dxoy0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ms2ag")

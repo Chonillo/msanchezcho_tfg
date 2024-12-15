@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwaph8l1ntqy6"]
+
+[ext_resource type="Texture2D" uid="uid://cf6mgsxoff6d8" path="res://assets/Objetos/basic_bullet.png" id="1_j03ed"]
+[ext_resource type="Script" path="res://scripts/basic_bullet.gd" id="1_waaad"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xjedi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y08yb"]
+radius = 3.0
+
+[node name="basicBullet" type="RigidBody2D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_xjedi")
+script = ExtResource("1_waaad")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.234375, 0.234375)
+texture = ExtResource("1_j03ed")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y08yb")
+
+[node name="LifetimeTimer" type="Timer" parent="."]

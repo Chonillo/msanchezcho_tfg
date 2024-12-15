@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmkfy76qcuh4u"]
+
+[ext_resource type="Texture2D" uid="uid://qmrskhu3jkyj" path="res://assets/Objetos/box_1_96x96.png" id="1_lvqw6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gm7pl"]
+size = Vector2(92, 94)
+
+[node name="RigidBody2D" type="RigidBody2D" groups=["pushable_objects"]]
+collision_layer = 16
+lock_rotation = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lvqw6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_gm7pl")

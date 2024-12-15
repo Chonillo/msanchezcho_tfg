@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciabd8nn1qdyn"]
+
+[ext_resource type="Script" path="res://scripts/crate.gd" id="1_dnrdv"]
+[ext_resource type="Texture2D" uid="uid://qmrskhu3jkyj" path="res://assets/Objetos/box_1_96x96.png" id="1_m7tpr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gyap0"]
+size = Vector2(92, 92)
+
+[node name="crate" type="CharacterBody2D"]
+collision_layer = 16
+script = ExtResource("1_dnrdv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m7tpr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gyap0")
