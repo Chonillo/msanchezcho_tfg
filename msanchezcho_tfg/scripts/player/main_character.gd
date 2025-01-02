@@ -1,7 +1,12 @@
 extends CharacterBody2D
 
 @export var move_speed: float
+@export var acceleration_speed: float
+@export var friction_speed: float
 @export var jump_speed: float
+@export var acceleration_jump: float
+@export var friction_jump: float
+#@export var jump_force: float
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 const HIGH_JUMP_VELOCITY = -550.0  # Velocidad de salto mayor
 const PUSH_FORCE = 350
@@ -39,9 +44,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_select"):
 		current_character = (current_character + 1) % characters.size()
 		switch_character(current_character)
-	elif event.is_action_pressed("ui_accept"):
-		if is_on_floor():
-			velocity.y = -jump_speed
+	#elif event.is_action_pressed("ui_accept"):
+		#if is_on_floor():
+			#velocity.y = -jump_speed
+		#elif not is_on_floor():
+			#if Input.is_action_just_released("ui_accept") and velocity.y < jump_speed / 2:
+				#velocity.y = jump_speed / 2
 	elif event.is_action_pressed("ui_jump_high"):
 		if is_on_floor() and current_character == 0:
 			velocity.y = HIGH_JUMP_VELOCITY
@@ -50,23 +58,69 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	aply_gravity(delta)
+	#if not is_on_floor():
+		#velocity += get_gravity() * delta
 
-	move_x()
+	move_x(delta)
+	handle_jump()
 	flip()
 	manage_animations()
 	handle_box_push()
 	move_and_slide()
+
+
+func aply_gravity(delta):
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+
+func move_x(delta):
+	var input_axis = Input.get_axis("ui_left", "ui_right")
+	handle_acceleration(input_axis, delta)
+	apply_friction(input_axis, delta)
+	handle_acceleration_jump(input_axis, delta)
+	apply_friction_jump(input_axis, delta)
+	#velocity.x = input_axis * move_speed
+
+
+func handle_acceleration(input_axis, delta):
+	if not is_on_floor(): return
+	if input_axis !=0:
+		velocity.x = move_toward(velocity.x, move_speed * input_axis, acceleration_speed * delta)
+
+
+func apply_friction(input_axis, delta):
+	if input_axis == 0 and is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, friction_speed * delta)
+
+
+func handle_jump():
+	if is_on_floor():
+		if Input.is_action_pressed("ui_accept"):
+			velocity.y = -jump_speed
+	#pendiente cambiarlo para que cuando salte se pueda suspender mas
+	#elif not is_on_floor():
+		#if Input.is_action_just_released("ui_accept") and velocity.y < jump_speed / 2:
+			#velocity.y = jump_speed / 2
+
+
+func handle_acceleration_jump(input_axis, delta):
+	if is_on_floor(): return
+	if input_axis != 0:
+		velocity.x = move_toward(velocity.x, move_speed * input_axis, acceleration_jump * delta)
+
+
+func apply_friction_jump(input_axis, delta):
+	if input_axis == 0 and not is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, friction_jump * delta)
+
 
 func flip():
 	if (is_facing_right and velocity.x < 0) or (not is_facing_right and velocity.x > 0):
 		scale.x *= -1
 		is_facing_right = not is_facing_right
 
-func move_x():
-	var input_axis = Input.get_axis("ui_left", "ui_right")
-	velocity.x = input_axis * move_speed
 
 func manage_animations():
 	if is_on_floor():
@@ -93,6 +147,7 @@ func handle_box_push():
 		#Solo Paolo puede empujar la caja
 		if collider.is_in_group("pushable_objects") and abs(collider.get_linear_velocity().x) < MAX_VELOCITY_PUSH and current_character == 2 and is_on_floor():
 			collider.apply_central_impulse(collision.get_normal() * -PUSH_FORCE)
+
 
 func shoot_projectile():
 	anim.play("basic_shot")
