@@ -1,167 +1,40 @@
+class_name MainCharacter
 extends CharacterBody2D
 
-@export var move_speed: float
-@export var acceleration_speed: float
-@export var friction_speed: float
-@export var jump_speed: float
-@export var acceleration_jump: float
-@export var friction_jump: float
-#@export var jump_force: float
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-const HIGH_JUMP_VELOCITY = -550.0  # Velocidad de salto mayor
-const PUSH_FORCE = 350
-const MAX_VELOCITY_PUSH = 150
 
 @onready var characters: Array[Sprite2D] = [$SpriteGroup2D/Edward, $SpriteGroup2D/Miguel, $SpriteGroup2D/Paolo]
-var current_character: int = 0
-var is_facing_right = true
-
-var anim: AnimationPlayer
-var sprite: Sprite2D
+@onready var animation_names = ["AnimationEdward", "AnimationMiguel", "AnimationPaolo"]
+@onready var anim: AnimationPlayer
+@onready var sprite: Sprite2D
 
 #shot
-@export var projectile_scene: PackedScene  # Arrastra aquí la escena "res://scenes/basicBullet.tscn"
+#@export var projectile_scene: PackedScene  # Arrastra aquí la escena "res://scenes/basicBullet.tscn"
 @export var projectile_speed: float = 300.0  # Velocidad del proyectil
 
-func _ready():
-	switch_character(0)
+@export var movement_stats:CharacterMovementStats
+# Referencia al cuerpo principal y animaciones
+@onready var body: Node2D = $SpriteGroup2D
+#@onready var animation_player = $AnimationPlayer
 
-func switch_character(indice: int) -> void:
-	for i in range(characters.size()):
-		characters[i].hide()
-	characters[indice].show()
-	current_character = indice
-	# Ajustar para obtener el AnimationPlayer correcto
-	if current_character == 0:
-		anim = characters[current_character].get_node("AnimationEdward")
-	elif current_character == 1:
-		anim = characters[current_character].get_node("AnimationMiguel")
-	elif current_character == 2:
-		anim = characters[current_character].get_node("AnimationPaolo")
-	sprite = characters[current_character]
+var current_character: int = 0
+var states:PlayerStateNames = PlayerStateNames.new()
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_select"):
-		current_character = (current_character + 1) % characters.size()
-		switch_character(current_character)
-	#elif event.is_action_pressed("ui_accept"):
-		#if is_on_floor():
-			#velocity.y = -jump_speed
-		#elif not is_on_floor():
-			#if Input.is_action_just_released("ui_accept") and velocity.y < jump_speed / 2:
-				#velocity.y = jump_speed / 2
-	elif event.is_action_pressed("ui_jump_high"):
-		if is_on_floor() and current_character == 0:
-			velocity.y = HIGH_JUMP_VELOCITY
-		if current_character == 1:#dispara pte animacion no work
-			shoot_projectile()
+#region nuevo codigo
+# Métodos auxiliares para direcciones y animaciones
+func set_facing_direction(x:float) -> void:
+	if abs(x) > 0:
+		body.scale.x = -1 if (x < 0) else 1
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	aply_gravity(delta)
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
+func is_facing_right() -> bool:
+	return body.scale.x > 0
 
-	move_x(delta)
-	handle_jump()
-	flip()
-	manage_animations()
-	handle_box_push()
-	move_and_slide()
+func _process(_delta):
+	set_facing_direction(velocity.x)
+	$Label.text = str(current_character)
 
-
-func aply_gravity(delta):
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-
-func move_x(delta):
-	var input_axis = Input.get_axis("ui_left", "ui_right")
-	handle_acceleration(input_axis, delta)
-	apply_friction(input_axis, delta)
-	handle_acceleration_jump(input_axis, delta)
-	apply_friction_jump(input_axis, delta)
-	#velocity.x = input_axis * move_speed
-
-
-func handle_acceleration(input_axis, delta):
-	if not is_on_floor(): return
-	if input_axis !=0:
-		velocity.x = move_toward(velocity.x, move_speed * input_axis, acceleration_speed * delta)
-
-
-func apply_friction(input_axis, delta):
-	if input_axis == 0 and is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, friction_speed * delta)
-
-
-func handle_jump():
-	if is_on_floor():
-		if Input.is_action_pressed("ui_accept"):
-			velocity.y = -jump_speed
-	#pendiente cambiarlo para que cuando salte se pueda suspender mas
-	#elif not is_on_floor():
-		#if Input.is_action_just_released("ui_accept") and velocity.y < jump_speed / 2:
-			#velocity.y = jump_speed / 2
-
-
-func handle_acceleration_jump(input_axis, delta):
-	if is_on_floor(): return
-	if input_axis != 0:
-		velocity.x = move_toward(velocity.x, move_speed * input_axis, acceleration_jump * delta)
-
-
-func apply_friction_jump(input_axis, delta):
-	if input_axis == 0 and not is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, friction_jump * delta)
-
-
-func flip():
-	if (is_facing_right and velocity.x < 0) or (not is_facing_right and velocity.x > 0):
-		scale.x *= -1
-		is_facing_right = not is_facing_right
-
-
-func manage_animations():
-	if is_on_floor():
-		if velocity.x == 0:
-			anim.play("idle")
-		elif abs(velocity.x) > 0:
-			anim.play("run")
-	else:
-		if velocity.y < 0:
-			anim.play("jump")
-		else:
-			anim.play("fall")
-
-
-func handle_box_push():
-	# Comprobar colisiones mientras el personaje se mueve
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		#collider.apply_central_impulse(collision.get_normal() * -PUSH_FORCE)
-		# Animacion de empujar
-		if collider.is_in_group("pushable_objects") and is_on_floor():
-			anim.play("push")
-		#Solo Paolo puede empujar la caja
-		if collider.is_in_group("pushable_objects") and abs(collider.get_linear_velocity().x) < MAX_VELOCITY_PUSH and current_character == 2 and is_on_floor():
-			collider.apply_central_impulse(collision.get_normal() * -PUSH_FORCE)
-
-
-func shoot_projectile():
-	anim.play("basic_shot")
-	# Verifica si el recurso del proyectil está asignado
-	if projectile_scene == null:
-		print("¡No se ha asignado la escena del proyectil!")
-		return
-
-	# Instanciar el proyectil
-	var projectile_instance = projectile_scene.instantiate()
-	projectile_instance.position = $projectileSpawn.global_position  # Posición inicial
-
-	# Configura la velocidad del proyectil según la dirección del personaje
-	projectile_instance.linear_velocity = Vector2(projectile_speed, 0) * (1 if is_facing_right else -1)
-
-	# Añadir el proyectil al árbol de la escena
-	get_tree().root.add_child(projectile_instance)
+func play_animation(animation_name: String):
+	#anim = character.get_node("AnimationEdward")
+	anim = characters[current_character].get_node(animation_names[current_character])
+	anim.play(animation_name)
+	
+#endregion

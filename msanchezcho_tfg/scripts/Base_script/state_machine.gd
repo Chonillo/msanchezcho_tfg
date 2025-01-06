@@ -4,10 +4,11 @@ class_name StateMachine extends Node
 @onready var controlled_node = self.owner
 
 ## estado por defecto
-@onready var default_state:StateBase
+@export var default_state:StateBase
 
 ## estado en ejecucion en cada momento
 var current_state:StateBase = null
+var previous_state:StateBase = null 
 
 func _ready():
 	call_deferred("_state_default_start")
@@ -27,8 +28,13 @@ func _state_start() -> void:
 ## metodo para cambiar de un nuevo estado
 func change_to(new_state:String) -> void:
 	if current_state and current_state.has_method("end"): current_state.end()
+	previous_state = current_state
 	current_state = get_node(new_state)
 	_state_start()
+
+func change_to_previous_state() -> void:
+	if previous_state:
+		change_to(previous_state.name)
 
 #region metodos que se ejecutan solo
 

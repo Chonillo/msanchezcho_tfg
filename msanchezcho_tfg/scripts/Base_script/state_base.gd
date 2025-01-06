@@ -1,4 +1,5 @@
-class_name StateBase extends Node
+class_name StateBase 
+extends Node
 
 ## referencia al nodo que se controla
 @onready var controlled_node:Node = self.owner
