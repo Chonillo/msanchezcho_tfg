@@ -8,6 +8,8 @@ func on_physics_process(delta):
 	## aplica friccion si tiene velocidad despues de correr
 	if abs(player.velocity.x) > 0:
 		apply_friction_on_floor(0, delta)
+	elif player.anim.current_animation == "basic_shot" and player.anim.is_playing():
+		pass#espera a que acabe
 	else:
 		player.play_animation("idle")
 	

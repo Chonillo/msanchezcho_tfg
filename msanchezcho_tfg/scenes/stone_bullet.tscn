@@ -1,0 +1,140 @@
+[gd_scene load_steps=17 format=3 uid="uid://cbtr4g3n0svyg"]
+
+[ext_resource type="Script" path="res://scripts/stone_bullet.gd" id="1_rkunr"]
+[ext_resource type="Texture2D" uid="uid://d331auo4jjwvy" path="res://assets/Objetos/piedra.png" id="1_sbeo8"]
+[ext_resource type="Texture2D" uid="uid://c7hjga7nf155g" path="res://assets/Efectos/Efectos humo.png" id="3_4yjh8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mvoy"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hh136"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbaq4"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tq7yq"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eikku"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqgi0"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oap73"]
+atlas = ExtResource("3_4yjh8")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1yvby"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sbeo8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mvoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hh136")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbaq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tq7yq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eikku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqgi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oap73")
+}],
+"loop": false,
+"name": &"disappear",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_6u4tl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoneSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hdvrq"]
+resource_name = "rotation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StoneSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_qgi4d"]
+resource_name = "disapear_bullet"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_201q1"]
+_data = {
+"RESET": SubResource("Animation_6u4tl"),
+"disapear_bullet": SubResource("Animation_qgi4d"),
+"rotation": SubResource("Animation_hdvrq")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8biew"]
+radius = 5.0
+
+[node name="stone_bullet" type="Area2D" groups=["g_bullet"]]
+collision_layer = 96
+collision_mask = 9
+script = ExtResource("1_rkunr")
+
+[node name="StoneSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_1yvby")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_201q1")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8biew")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="StoneSprite" to="." method="_on_stone_sprite_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

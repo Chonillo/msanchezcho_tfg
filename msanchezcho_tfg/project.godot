@@ -28,6 +28,7 @@ window/stretch/mode="canvas_items"
 
 pushable_objects="Objects that can be pushed"
 group_enemies=""
+g_bullet=""
 
 [input]
 
@@ -52,6 +53,7 @@ ui_special_skill={
 2d_physics/layer_5="pushable_objects"
 2d_physics/layer_6="shoot"
 2d_physics/layer_7="MainCharacter"
+2d_physics/layer_8="Objects"
 
 [rendering]
 
