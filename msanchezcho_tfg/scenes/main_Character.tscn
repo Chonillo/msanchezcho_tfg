@@ -59,6 +59,22 @@ tracks/0/keys = {
 "values": [11]
 }
 
+[sub_resource type="Animation" id="Animation_vdyu3"]
+resource_name = "hurt"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 13, 14]
+}
+
 [sub_resource type="Animation" id="Animation_fmbis"]
 resource_name = "idle"
 length = 0.6
@@ -126,22 +142,6 @@ tracks/0/keys = {
 "values": [4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_vdyu3"]
-resource_name = "hurt"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 13, 14]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ft6mp"]
 _data = {
 "RESET": SubResource("Animation_yq5hh"),
@@ -198,6 +198,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_4xbce"]
+resource_name = "hurt"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 13, 14]
 }
 
 [sub_resource type="Animation" id="Animation_hunwg"]
@@ -266,22 +282,6 @@ tracks/0/keys = {
 "values": [4, 5, 6, 7]
 }
 
-[sub_resource type="Animation" id="Animation_4xbce"]
-resource_name = "hurt"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 13, 14]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uw4il"]
 _data = {
 "RESET": SubResource("Animation_ybv7v"),
@@ -323,6 +323,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_wmmxa"]
+resource_name = "hurt"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 13, 14]
 }
 
 [sub_resource type="Animation" id="Animation_tnmit"]
@@ -390,22 +406,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_wmmxa"]
-resource_name = "hurt"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 13, 14]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7poil"]

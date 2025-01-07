@@ -38,7 +38,7 @@ func play_animation(animation_name: String):
 	anim = characters[current_character].get_node(animation_names[current_character])
 	anim.play(animation_name)
 
-func player_damage_control(damage: int):
+func player_damage_control(_damage: int):
 	$StateMachine.change_to(states.Hurt)
 
 #endregion

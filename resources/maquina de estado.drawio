@@ -137,7 +137,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="o6vgtia0mIigF-woyxEz" name="Página-2">
-    <mxGraphModel dx="13390" dy="9660" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="6130" dy="5685" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -326,6 +326,9 @@
         </mxCell>
         <mxCell id="O7sZlIeFzlT6NpF7Ckhc-77" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
           <mxGeometry x="10704" y="-2453" width="273" height="2871" as="geometry" />
+        </mxCell>
+        <mxCell id="O7sZlIeFzlT6NpF7Ckhc-78" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
+          <mxGeometry x="2068" y="252" width="608" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
