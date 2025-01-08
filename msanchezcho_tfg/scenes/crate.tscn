@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://qmrskhu3jkyj" path="res://assets/Objetos/box_1_96x96.png" id="1_m7tpr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyap0"]
-size = Vector2(92, 92)
+size = Vector2(94, 92)
 
 [node name="crate" type="CharacterBody2D"]
 collision_layer = 16

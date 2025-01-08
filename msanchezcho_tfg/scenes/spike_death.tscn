@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpyn3gf7vwt3y"]
+
+[ext_resource type="Texture2D" uid="uid://mflmm71gggl" path="res://assets/Objetos/Spike.png" id="1_0wvbw"]
+[ext_resource type="Script" path="res://scripts/Enemies/spike_death.gd" id="1_01sw2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1pk5"]
+size = Vector2(27.5, 5.5)
+
+[node name="spikeDeath" type="Area2D"]
+position = Vector2(-7, 0)
+scale = Vector2(2, 2)
+collision_layer = 8
+collision_mask = 64
+script = ExtResource("1_01sw2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0wvbw")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(16, 0)
+texture = ExtResource("1_0wvbw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7.25, 5.25)
+shape = SubResource("RectangleShape2D_u1pk5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

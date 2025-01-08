@@ -137,7 +137,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="o6vgtia0mIigF-woyxEz" name="Página-2">
-    <mxGraphModel dx="6130" dy="5685" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="11460" dy="8570" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -329,6 +329,18 @@
         </mxCell>
         <mxCell id="O7sZlIeFzlT6NpF7Ckhc-78" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#a20025;fontColor=#ffffff;strokeColor=#6F0000;" vertex="1" parent="1">
           <mxGeometry x="2068" y="252" width="608" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="O7sZlIeFzlT6NpF7Ckhc-79" value="dialogo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="-271" y="314" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="O7sZlIeFzlT6NpF7Ckhc-80" value="dialogo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="397.5" y="-77.5" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="O7sZlIeFzlT6NpF7Ckhc-81" value="dialogo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="1129" y="72" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="O7sZlIeFzlT6NpF7Ckhc-85" value="dialogo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" vertex="1" parent="1">
+          <mxGeometry x="9183" y="-1428" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

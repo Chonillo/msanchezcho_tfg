@@ -1,6 +1,8 @@
 extends PlayerStateGravityBase
 
 func start():
+	if player.effects.is_playing():
+		player.effects.stop()
 	player.current_character = (player.current_character + 1) % player.characters.size()
 	switch_character(player.current_character)
 
@@ -18,3 +20,6 @@ func switch_character(indice: int):
 		player.anim = player.characters[player.current_character].get_node(player.animation_names[player.current_character])
 	player.sprite = player.characters[player.current_character]
 	state_machine.change_to_previous_state()  # Volver al estado anterior automáticamente
+
+func end():
+	player.effects.play("changeCharacter")

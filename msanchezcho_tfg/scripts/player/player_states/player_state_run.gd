@@ -53,15 +53,8 @@ func _on_coyote_run_timeout() -> void:
 		state_machine.change_to(player.states.Fall)
 
 func pushing_object():
-	# Comprobar colisiones mientras el personaje se mueve
-	for i in player.get_slide_collision_count():
-		var collision = player.get_slide_collision(i)
-		var collider = collision.get_collider()
-		#collider.apply_central_impulse(collision.get_normal() * -PUSH_FORCE)
-		# Animacion de empujar
-		if collider.is_in_group("pushable_objects") and player.is_on_floor():
-			print("caja")
-			player.anim.play("push")
-		#Solo Paolo puede empujar la caja
-		if collider.is_in_group("pushable_objects") and abs(collider.get_linear_velocity().x) < player.movement_stats.max_velocity_push and player.current_character == 2 and player.is_on_floor():
-			collider.apply_central_impulse(collision.get_normal() * -player.movement_stats.push_force)
+	if player.ray_cast_box.is_colliding() and player.is_on_floor() and player.current_character == 2:
+		var colider = player.ray_cast_box.get_collider()
+		colider.direction = -1 if (player.velocity.x < 0) else 1
+		colider.move_and_slide()
+		player.anim.play("push")

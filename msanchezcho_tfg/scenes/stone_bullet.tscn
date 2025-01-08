@@ -84,6 +84,9 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_qgi4d"]
+resource_name = "disapear_bullet"
+
 [sub_resource type="Animation" id="Animation_hdvrq"]
 resource_name = "rotation"
 length = 0.8
@@ -100,9 +103,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 6.28319]
 }
-
-[sub_resource type="Animation" id="Animation_qgi4d"]
-resource_name = "disapear_bullet"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_201q1"]
 _data = {

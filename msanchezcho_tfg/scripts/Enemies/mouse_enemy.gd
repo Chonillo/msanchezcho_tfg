@@ -51,4 +51,3 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	if body is MainCharacter and health > 0:
 		body.player_damage_control(1)
-	pass # Replace with function body.

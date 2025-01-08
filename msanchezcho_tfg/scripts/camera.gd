@@ -11,3 +11,5 @@ func _process(_delta):
 
 func _ready():
 	limit_left = -32  # Límite izquierdo
+	limit_right = 4960
+	limit_bottom = 550

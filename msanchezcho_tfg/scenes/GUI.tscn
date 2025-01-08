@@ -1,0 +1,260 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf28uxje0ej6"]
+
+[ext_resource type="Theme" uid="uid://d0wwhalvdfjfj" path="res://assets/GUI/theme/new_theme.tres" id="1_ndxrs"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="1_wecxc"]
+[ext_resource type="Texture2D" uid="uid://bj8gdfafhgu5i" path="res://assets/GUI/corazon_vidas.png" id="2_mqtxo"]
+[ext_resource type="Texture2D" uid="uid://dgob566npv3io" path="res://assets/Efectos/gem3/0001.png" id="3_qwl1p"]
+
+[sub_resource type="Animation" id="Animation_mus1s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_7qtu7"]
+resource_name = "disappear_heart_1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart1:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3nnhp"]
+resource_name = "disappear_heart_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t0axt"]
+resource_name = "disappear_heart_3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart3:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6l05v"]
+resource_name = "heart_ani"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Heart2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Heart3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Heart1:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5w06"]
+_data = {
+"RESET": SubResource("Animation_mus1s"),
+"disappear_heart_1": SubResource("Animation_7qtu7"),
+"disappear_heart_2": SubResource("Animation_3nnhp"),
+"disappear_heart_3": SubResource("Animation_t0axt"),
+"heart_ani": SubResource("Animation_6l05v")
+}
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_wecxc")
+
+[node name="Heart1" type="TextureRect" parent="."]
+offset_left = 516.0
+offset_top = 14.0
+offset_right = 548.0
+offset_bottom = 46.0
+scale = Vector2(1.1, 1.1)
+size_flags_vertical = 4
+texture = ExtResource("2_mqtxo")
+
+[node name="Heart2" type="TextureRect" parent="."]
+offset_left = 552.0
+offset_top = 14.0
+offset_right = 584.0
+offset_bottom = 46.0
+scale = Vector2(1.04341, 1.04341)
+size_flags_vertical = 4
+texture = ExtResource("2_mqtxo")
+
+[node name="Heart3" type="TextureRect" parent="."]
+offset_left = 588.0
+offset_top = 14.0
+offset_right = 620.0
+offset_bottom = 46.0
+scale = Vector2(1.04341, 1.04341)
+size_flags_vertical = 4
+texture = ExtResource("2_mqtxo")
+
+[node name="GemsContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GemIcon" type="TextureRect" parent="GemsContainer"]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 16.0
+offset_right = 541.0
+offset_bottom = 80.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_qwl1p")
+
+[node name="GemsText" type="Label" parent="GemsContainer"]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 43.0
+offset_right = 544.0
+offset_bottom = 71.0
+theme = ExtResource("1_ndxrs")
+theme_override_font_sizes/font_size = 20
+text = "null"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b5w06")
+}
+
+[node name="GameOver" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 646.0
+offset_bottom = 363.0
+color = Color(0.752941, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -141.0
+offset_top = -25.5
+offset_right = 141.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_ndxrs")
+text = "HAS MUERTO"
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="bReiniciar" type="Button" parent="GameOver/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Reiniciar"
+
+[node name="bExit" type="Button" parent="GameOver/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Salir del juego"
+
+[connection signal="pressed" from="GameOver/VBoxContainer/HBoxContainer/bReiniciar" to="." method="_on_b_reiniciar_pressed"]
+[connection signal="pressed" from="GameOver/VBoxContainer/HBoxContainer/bExit" to="." method="_on_b_exit_pressed"]
