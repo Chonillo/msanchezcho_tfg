@@ -1,0 +1,197 @@
+[gd_scene load_steps=12 format=3 uid="uid://csv7u3hewxdef"]
+
+[ext_resource type="Script" path="res://scripts/otros/dialogo_gui.gd" id="1_e1dm0"]
+[ext_resource type="Texture2D" uid="uid://dg8myqq2qjjw4" path="res://assets/GUI/dialogue_panel2.png" id="1_x03wt"]
+[ext_resource type="Texture2D" uid="uid://x2ab2hm3ih7h" path="res://assets/GUI/botondialogue.png" id="2_ap0d6"]
+[ext_resource type="Texture2D" uid="uid://uxwqdx4n136c" path="res://assets/Personajes/sprite_Edward/SpriteSheet_Per1.png" id="2_d1may"]
+[ext_resource type="Theme" uid="uid://ce8leaiyqewdx" path="res://assets/GUI/theme/dialogo_gui.tres" id="3_l7u50"]
+[ext_resource type="Texture2D" uid="uid://oyxsj6x4c0mn" path="res://assets/Personajes/sprite_Miguel/SpriteSheet_Per2.png" id="3_u5iyk"]
+[ext_resource type="Texture2D" uid="uid://di527j5dwv7x0" path="res://assets/Personajes/sprite_Paolo/SpriteSheet_Per3.png" id="4_ygutv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8ada"]
+texture = ExtResource("1_x03wt")
+region_rect = Rect2(0, 0, 176, 62)
+
+[sub_resource type="Animation" id="Animation_68e6j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/spriteEdward:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/spriteMiguel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/spritePaolo:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ni1wx"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/spriteEdward:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.6, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/spriteMiguel:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.133333, 0.433333, 0.666667, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/spritePaolo:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0666667, 0.333333, 0.6, 0.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_30b0e"]
+_data = {
+"RESET": SubResource("Animation_68e6j"),
+"idle": SubResource("Animation_ni1wx")
+}
+
+[node name="DialogoGui" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_e1dm0")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="spriteEdward" type="Sprite2D" parent="Control"]
+position = Vector2(445, 98)
+scale = Vector2(1.42188, 2.68823)
+texture = ExtResource("2_d1may")
+offset = Vector2(32, 32)
+flip_h = true
+hframes = 4
+vframes = 5
+region_rect = Rect2(5, 0, 56, 55)
+
+[node name="spriteMiguel" type="Sprite2D" parent="Control"]
+position = Vector2(367, 97)
+scale = Vector2(1.42188, 2.68823)
+texture = ExtResource("3_u5iyk")
+offset = Vector2(32, 38)
+flip_h = true
+hframes = 4
+vframes = 5
+region_rect = Rect2(5, 0, 56, 55)
+
+[node name="spritePaolo" type="Sprite2D" parent="Control"]
+position = Vector2(134, 98)
+scale = Vector2(1.42188, 2.68823)
+texture = ExtResource("4_ygutv")
+offset = Vector2(32, 38)
+hframes = 4
+vframes = 5
+region_rect = Rect2(5, 0, 56, 55)
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.109
+anchor_top = 0.667
+anchor_right = 0.891
+anchor_bottom = 0.944
+offset_left = 0.239998
+offset_top = -0.120026
+offset_right = -0.23999
+offset_bottom = 0.159973
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_a8ada")
+
+[node name="Control" type="Control" parent="Control/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/PanelContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.876
+anchor_top = 0.6
+anchor_right = 0.98
+anchor_bottom = 0.89
+offset_left = -3.05176e-05
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_ap0d6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 2
+offset_left = 89.0
+offset_top = 261.0
+offset_right = 519.0
+offset_bottom = 330.0
+theme = ExtResource("3_l7u50")
+bbcode_enabled = true
+text = "PRUEBA DE TEXTO
+Miguel: Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. "
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_30b0e")
+}
+autoplay = "idle"

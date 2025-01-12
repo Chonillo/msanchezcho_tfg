@@ -34,6 +34,7 @@ func damage_control(damage: int):
 	health -= damage
 	
 	if health <= 0:
+		$AudioStreamPlayer2D.play()
 		$AnimatedSprite2D.play("Die")
 		speed = 0
 

@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dr81j77dpg1mc"]
+[gd_scene load_steps=9 format=3 uid="uid://dr81j77dpg1mc"]
 
 [ext_resource type="Texture2D" uid="uid://d1sksefqp22x4" path="res://assets/Efectos/green_gem_6.png" id="1_efo21"]
+[ext_resource type="Script" path="res://scripts/collectible/collectible_win_level.gd" id="1_jj640"]
+[ext_resource type="AudioStream" uid="uid://dhp0bieg38yu2" path="res://assets/Sounds/Effects/win_gem.wav" id="3_w7y24"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af6si"]
 size = Vector2(36, 40)
@@ -60,7 +62,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 2.0, 0.0]
+"values": [0.0, 4.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6fkm0"]
@@ -70,6 +72,9 @@ _data = {
 }
 
 [node name="collectible_win_level" type="Area2D"]
+collision_layer = 128
+collision_mask = 64
+script = ExtResource("1_jj640")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.90735e-06, -1.90735e-06)
@@ -84,10 +89,16 @@ shape = SubResource("RectangleShape2D_af6si")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.0
 texture = SubResource("Texture2DRD_f2arn")
-texture_scale = 13.59
+texture_scale = 25.66
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6fkm0")
 }
 autoplay = "pulse"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w7y24")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

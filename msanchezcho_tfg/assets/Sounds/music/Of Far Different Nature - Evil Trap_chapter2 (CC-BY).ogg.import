@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bqmiis1s7r7nh"
+path="res://.godot/imported/Of Far Different Nature - Evil Trap_chapter2 (CC-BY).ogg-50b96ad9da1893199e290ca1f0fa84aa.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/Sounds/music/Of Far Different Nature - Evil Trap_chapter2 (CC-BY).ogg"
+dest_files=["res://.godot/imported/Of Far Different Nature - Evil Trap_chapter2 (CC-BY).ogg-50b96ad9da1893199e290ca1f0fa84aa.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

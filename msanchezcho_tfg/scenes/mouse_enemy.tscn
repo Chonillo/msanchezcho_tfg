@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bjlnyt6y608ne"]
+[gd_scene load_steps=16 format=3 uid="uid://bjlnyt6y608ne"]
 
 [ext_resource type="Script" path="res://scripts/Enemies/mouse_enemy.gd" id="1_tuf55"]
 [ext_resource type="Texture2D" uid="uid://bwb7dpki7fwy6" path="res://assets/Enemigos/Rat/Death.png" id="2_3lsx6"]
 [ext_resource type="Texture2D" uid="uid://i7rtiotlxks" path="res://assets/Enemigos/Rat/Walk.png" id="2_vw4s8"]
+[ext_resource type="AudioStream" uid="uid://d0whauvtj3h75" path="res://assets/Sounds/Effects/rat_swaut.wav" id="4_5gs44"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aguwa"]
 atlas = ExtResource("2_3lsx6")
@@ -74,10 +75,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ujble"]
-size = Vector2(21, 14)
+size = Vector2(29, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ms2ag"]
-size = Vector2(40.5, 16)
+size = Vector2(35, 21)
 
 [node name="mouseEnemy" type="CharacterBody2D" groups=["group_enemies"]]
 collision_layer = 8
@@ -105,12 +106,16 @@ collision_layer = 8
 collision_mask = 96
 
 [node name="CollisionDamage" type="CollisionShape2D" parent="AnimatedSprite2D/damage_area"]
-position = Vector2(12.5, -1)
+position = Vector2(9.5, -4)
 shape = SubResource("RectangleShape2D_ujble")
 
 [node name="CollisionSprite" type="CollisionShape2D" parent="."]
-position = Vector2(-0.25, -1)
+position = Vector2(2.5, -3.5)
 shape = SubResource("RectangleShape2D_ms2ag")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5gs44")
+max_distance = 500.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="AnimatedSprite2D/damage_area" to="." method="_on_damage_area_area_entered"]

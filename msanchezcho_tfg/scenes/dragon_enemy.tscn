@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://xhrvtues1e07"]
+
+[ext_resource type="Script" path="res://scripts/Enemies/dragon_enemy.gd" id="1_2v11a"]
+[ext_resource type="Texture2D" uid="uid://dr83savme6nmy" path="res://assets/Enemigos/dragon/Walk1.png" id="1_tnv2h"]
+[ext_resource type="Texture2D" uid="uid://djomt5rjppch8" path="res://assets/Enemigos/dragon/Walk2.png" id="2_rasqw"]
+[ext_resource type="AudioStream" uid="uid://d0whauvtj3h75" path="res://assets/Sounds/Effects/rat_swaut.wav" id="3_ahxbb"]
+[ext_resource type="Texture2D" uid="uid://mro8d5b2p1k8" path="res://assets/Enemigos/dragon/Walk3.png" id="3_f43ps"]
+[ext_resource type="Texture2D" uid="uid://2witufcp1l25" path="res://assets/Enemigos/dragon/Walk4.png" id="4_j8t3w"]
+[ext_resource type="Texture2D" uid="uid://glk5vmj8wudp" path="res://assets/Enemigos/dragon/Walk5.png" id="5_5v833"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8mwf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_tnv2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rasqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f43ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j8t3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5v833")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujble"]
+size = Vector2(99, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ms2ag"]
+size = Vector2(101, 60)
+
+[node name="dragonEnemy" type="CharacterBody2D" groups=["group_enemies"]]
+collision_layer = 8
+collision_mask = 43
+script = ExtResource("1_2v11a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-11, -40)
+sprite_frames = SubResource("SpriteFrames_v8mwf")
+autoplay = "default"
+frame_progress = 0.482917
+
+[node name="RayGround" type="RayCast2D" parent="AnimatedSprite2D"]
+position = Vector2(27, 41)
+scale = Vector2(2, 2)
+target_position = Vector2(0, 15.5)
+
+[node name="damage_area" type="Area2D" parent="AnimatedSprite2D"]
+position = Vector2(11, 40)
+collision_layer = 8
+collision_mask = 96
+
+[node name="CollisionDamage" type="CollisionShape2D" parent="AnimatedSprite2D/damage_area"]
+position = Vector2(-0.5, -11)
+shape = SubResource("RectangleShape2D_ujble")
+
+[node name="CollisionSprite" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -10)
+shape = SubResource("RectangleShape2D_ms2ag")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ahxbb")
+max_distance = 500.0
+
+[connection signal="body_entered" from="AnimatedSprite2D/damage_area" to="." method="_on_damage_area_body_entered"]

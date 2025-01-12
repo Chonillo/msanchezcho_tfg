@@ -1,7 +1,6 @@
-[gd_scene load_steps=59 format=3 uid="uid://bxlr3c3ub6q1j"]
+[gd_scene load_steps=67 format=3 uid="uid://bxlr3c3ub6q1j"]
 
 [ext_resource type="Script" path="res://scripts/player/main_character.gd" id="1_yigpu"]
-[ext_resource type="PackedScene" uid="uid://cbtr4g3n0svyg" path="res://scenes/stone_bullet.tscn" id="2_llwgt"]
 [ext_resource type="Script" path="res://scripts/Base_script/character_movement_stats.gd" id="2_ncxgy"]
 [ext_resource type="Texture2D" uid="uid://uxwqdx4n136c" path="res://assets/Personajes/sprite_Edward/SpriteSheet_Per1.png" id="3_x18cv"]
 [ext_resource type="Texture2D" uid="uid://c7hjga7nf155g" path="res://assets/Efectos/Efectos humo.png" id="4_bro8e"]
@@ -17,6 +16,14 @@
 [ext_resource type="Script" path="res://scripts/player/player_states/player_double_jump.gd" id="13_8y7pn"]
 [ext_resource type="Script" path="res://scripts/player/player_states/player_hurt.gd" id="15_ljud7"]
 [ext_resource type="Script" path="res://scripts/player/player_states/player_death.gd" id="16_yh7kh"]
+[ext_resource type="Script" path="res://scripts/player/player_states/player_state_push.gd" id="18_0531e"]
+[ext_resource type="AudioStream" uid="uid://ccto0ududiroc" path="res://assets/Sounds/Effects/double_jump.wav" id="18_ilbet"]
+[ext_resource type="AudioStream" uid="uid://b3xrytwcr16st" path="res://assets/Sounds/Effects/jump_basic.wav" id="19_ao876"]
+[ext_resource type="AudioStream" uid="uid://cth16g3173qk1" path="res://assets/Sounds/Effects/walk_low_loop.wav" id="19_sw86n"]
+[ext_resource type="AudioStream" uid="uid://ddafwaw7ht2iw" path="res://assets/Sounds/Effects/Hit damage 1.wav" id="20_ogge7"]
+[ext_resource type="AudioStream" uid="uid://eou7kmqekjey" path="res://assets/Sounds/Effects/game-over.wav" id="22_k3awn"]
+[ext_resource type="AudioStream" uid="uid://dj263elqnbd4w" path="res://assets/Sounds/Effects/fall.wav" id="23_6oo0p"]
+[ext_resource type="AudioStream" uid="uid://ct6bv7s6u8he0" path="res://assets/Sounds/Effects/switch_character_sound.wav" id="24_8ucmm"]
 
 [sub_resource type="Resource" id="Resource_naovv"]
 script = ExtResource("2_ncxgy")
@@ -160,6 +167,23 @@ tracks/0/keys = {
 "values": [4, 5, 6, 7]
 }
 
+[sub_resource type="Animation" id="Animation_70vgh"]
+resource_name = "special_jump"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 9]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ft6mp"]
 _data = {
 "RESET": SubResource("Animation_yq5hh"),
@@ -169,7 +193,8 @@ _data = {
 "idle": SubResource("Animation_fmbis"),
 "jump": SubResource("Animation_v7lsh"),
 "push": SubResource("Animation_bu15g"),
-"run": SubResource("Animation_fq7p5")
+"run": SubResource("Animation_fq7p5"),
+"special_jump": SubResource("Animation_70vgh")
 }
 
 [sub_resource type="Animation" id="Animation_ybv7v"]
@@ -557,13 +582,11 @@ bg_color = Color(0.08469, 0.0846899, 0.0846898, 1)
 collision_layer = 64
 collision_mask = 17
 script = ExtResource("1_yigpu")
-projectile_scene = ExtResource("2_llwgt")
 movement_stats = SubResource("Resource_naovv")
 
 [node name="SpriteGroup2D" type="Node2D" parent="."]
 
 [node name="Edward" type="Sprite2D" parent="SpriteGroup2D"]
-visible = false
 position = Vector2(0, -8)
 texture = ExtResource("3_x18cv")
 hframes = 4
@@ -588,6 +611,7 @@ libraries = {
 }
 
 [node name="Paolo" type="Sprite2D" parent="SpriteGroup2D"]
+visible = false
 position = Vector2(0, -8)
 texture = ExtResource("5_hmhk4")
 hframes = 4
@@ -657,6 +681,9 @@ script = ExtResource("15_ljud7")
 [node name="PlayerDeath" type="Node" parent="StateMachine"]
 script = ExtResource("16_yh7kh")
 
+[node name="PlayerStatePush" type="Node" parent="StateMachine"]
+script = ExtResource("18_0531e")
+
 [node name="Label" type="Label" parent="."]
 visible = false
 offset_left = -29.0
@@ -664,6 +691,29 @@ offset_top = -61.0
 offset_right = 94.0
 offset_bottom = -33.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_f8pvx")
+
+[node name="doubleJump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_ilbet")
+
+[node name="jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_ao876")
+
+[node name="walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_sw86n")
+volume_db = -15.0
+pitch_scale = 0.65
+
+[node name="Hitdmg" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_ogge7")
+
+[node name="gameOver" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_k3awn")
+
+[node name="fall" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_6oo0p")
+
+[node name="swtichCharacter" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_8ucmm")
 
 [connection signal="timeout" from="StateMachine/PlayerStateIdle/CoyoteIdle" to="StateMachine/PlayerStateIdle" method="_on_coyote_idle_timeout"]
 [connection signal="timeout" from="StateMachine/PlayerStateRun/CoyoteRun" to="StateMachine/PlayerStateRun" method="_on_coyote_run_timeout"]

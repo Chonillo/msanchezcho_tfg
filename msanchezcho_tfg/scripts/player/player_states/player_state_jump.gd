@@ -6,13 +6,13 @@ var has_jumped: bool = false## Variable para controlar si el personaje ya ha sal
 func start():
 	# Reproduce la animación de salto
 	player.play_animation("jump")
+	player.jump_sound.volume_db = -15
+	player.jump_sound.play()
 	# Reinicia la variable has_jumped a false cuando el estado de salto comienza
 	has_jumped = false
 
 # Función que se llama en cada frame de física
-func on_physics_process(delta):
-	#player.play_animation("jump")
-	
+func on_physics_process(delta):	
 	# Obtiene el eje de entrada del jugador (izquierda/derecha)
 	var input_axis = Input.get_axis("ui_left", "ui_right")
 	

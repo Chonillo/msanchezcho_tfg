@@ -1,6 +1,9 @@
 extends PlayerStateGravityBase
 
 func start():
+	# Reproduce la animación de salto
+	player.swtich_character.volume_db = -5
+	player.swtich_character.play()
 	if player.effects.is_playing():
 		player.effects.stop()
 	player.current_character = (player.current_character + 1) % player.characters.size()

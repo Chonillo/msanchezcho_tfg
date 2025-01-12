@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf03h6h1nfxvm"]
+
+[ext_resource type="Script" path="res://scripts/otros/area_dialogo.gd" id="1_coad4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tb5ax"]
+size = Vector2(20, 350)
+
+[node name="dialogoArea" type="Area2D"]
+collision_layer = 256
+collision_mask = 64
+script = ExtResource("1_coad4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tb5ax")
+debug_color = Color(0.776326, 0.41419, 0.406512, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

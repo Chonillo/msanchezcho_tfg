@@ -4,6 +4,8 @@ extends PlayerStateGravityBase
 var animationFinished = false
  
 func start():
+	player.walk_sound.pitch_scale = 1.4
+	player.walk_sound.volume_db = -20
 	if player.anim.current_animation == "basic_shot" and player.anim.is_playing():
 		pass#espera a que acabe
 	else:
@@ -13,7 +15,12 @@ func end():
 	animationFinished = false
 
 func on_physics_process(delta):
-	#player.play_animation("run") 
+	# Verificar si está reproduciéndose
+	if player.walk_sound.playing:
+		pass
+	else:
+		player.walk_sound.play()
+	
 	var input_axis = Input.get_axis("ui_left", "ui_right")
 	handle_acceleration(input_axis, delta)
 	handle_gravity(delta)
@@ -30,6 +37,7 @@ func on_physics_process(delta):
 	
 	## manage special skills while run
 	pushing_object()
+		
 	if player.anim.current_animation == "basic_shot" and player.anim.is_playing():
 		pass#espera a que acabe
 	

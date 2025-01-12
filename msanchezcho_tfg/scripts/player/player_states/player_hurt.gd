@@ -2,6 +2,7 @@ extends PlayerStateGravityBase
 
 
 func start():
+	player.hit_dmg_sound.play()
 	player.anim.play("hurt")
 
 func on_process(_delta):

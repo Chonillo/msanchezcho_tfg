@@ -8,6 +8,7 @@ var isFlip = false
 signal bullet_destroyed
 
 func _ready():
+	$drop_stone.play()
 	$Timer.start()
 	if isFlip:
 		velocity.x *= -1
@@ -30,6 +31,7 @@ func _on_body_entered(_body: Node2D) -> void:
 	velocity = Vector2(0, 0)
 	gravity = 0
 	air_resistance = 0
+	$AudioStreamPlayer2D.play()
 	$AnimationPlayer.stop()
 	$StoneSprite.play("disappear")
 

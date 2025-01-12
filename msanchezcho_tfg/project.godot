@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="msanchezcho_TFG"
-run/main_scene="res://scenes/chapter_1.tscn"
+run/main_scene="res://scenes/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="res://icon/icono_ddr.png"
 
 [autoload]
 
@@ -58,6 +58,7 @@ ui_special_skill={
 2d_physics/layer_6="shoot"
 2d_physics/layer_7="MainCharacter"
 2d_physics/layer_8="Objects"
+2d_physics/layer_9="dialogo"
 
 [rendering]
 

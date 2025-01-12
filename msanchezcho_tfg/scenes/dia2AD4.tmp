@@ -1,0 +1,99 @@
+[gd_scene load_steps=9 format=3 uid="uid://csv7u3hewxdef"]
+
+[ext_resource type="Script" path="res://scripts/otros/dialogo_gui.gd" id="1_e1dm0"]
+[ext_resource type="Texture2D" uid="uid://dg8myqq2qjjw4" path="res://assets/GUI/dialogue_panel2.png" id="1_x03wt"]
+[ext_resource type="Texture2D" uid="uid://x2ab2hm3ih7h" path="res://assets/GUI/botondialogue.png" id="2_ap0d6"]
+[ext_resource type="Texture2D" uid="uid://uxwqdx4n136c" path="res://assets/Personajes/sprite_Edward/SpriteSheet_Per1.png" id="2_d1may"]
+[ext_resource type="Theme" uid="uid://ce8leaiyqewdx" path="res://assets/GUI/theme/dialogo_gui.tres" id="3_l7u50"]
+[ext_resource type="Texture2D" uid="uid://oyxsj6x4c0mn" path="res://assets/Personajes/sprite_Miguel/SpriteSheet_Per2.png" id="3_u5iyk"]
+[ext_resource type="Texture2D" uid="uid://di527j5dwv7x0" path="res://assets/Personajes/sprite_Paolo/SpriteSheet_Per3.png" id="4_ygutv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8ada"]
+texture = ExtResource("1_x03wt")
+region_rect = Rect2(0, 0, 176, 62)
+
+[node name="CanvasLayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e1dm0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="spriteEdward" type="Sprite2D" parent="."]
+position = Vector2(159, 186)
+scale = Vector2(1.42188, 2.68823)
+texture = ExtResource("2_d1may")
+hframes = 4
+vframes = 5
+region_rect = Rect2(5, 0, 56, 55)
+
+[node name="spriteMiguel" type="Sprite2D" parent="."]
+position = Vector2(384, 204)
+scale = Vector2(1.42188, 2.68823)
+texture = ExtResource("3_u5iyk")
+flip_h = true
+hframes = 4
+vframes = 5
+region_rect = Rect2(5, 0, 56, 55)
+
+[node name="spritePaolo" type="Sprite2D" parent="."]
+position = Vector2(476, 203)
+scale = Vector2(1.42188, 2.68823)
+texture = ExtResource("4_ygutv")
+flip_h = true
+hframes = 4
+vframes = 5
+region_rect = Rect2(5, 0, 56, 55)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.109
+anchor_top = 0.667
+anchor_right = 0.891
+anchor_bottom = 0.944
+offset_left = 0.239998
+offset_top = -0.120026
+offset_right = -0.23999
+offset_bottom = 0.159973
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_a8ada")
+
+[node name="Control" type="Control" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.876
+anchor_top = 0.6
+anchor_right = 0.98
+anchor_bottom = 0.89
+offset_left = -3.05176e-05
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_ap0d6")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+offset_left = 90.0
+offset_top = 256.0
+offset_right = 520.0
+offset_bottom = 325.0
+theme = ExtResource("3_l7u50")
+bbcode_enabled = true
+text = "PRUEBA DE TEXTO
+Miguel: Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. "

@@ -20,15 +20,16 @@ func on_physics_process(delta):
 	player.move_and_slide()
 	
 func on_input(_event):
-	# seria mejor usar el parametro _event para obtener la información del evento
-	if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"): 
-		state_machine.change_to(player.states.Run)
-	elif Input.is_action_just_pressed("ui_select"):
-		state_machine.change_to(player.states.SwitchCharacter)
-	elif Input.is_action_just_pressed("ui_accept"):
-		state_machine.change_to(player.states.Jump)
-	elif Input.is_action_just_pressed("ui_special_skill"):
-		state_machine.change_to(player.states.SpecialSkill)
+	if player.can_move:
+		# seria mejor usar el parametro _event para obtener la información del evento
+		if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"): 
+			state_machine.change_to(player.states.Run)
+		elif Input.is_action_just_pressed("ui_select"):
+			state_machine.change_to(player.states.SwitchCharacter)
+		elif Input.is_action_just_pressed("ui_accept"):
+			state_machine.change_to(player.states.Jump)
+		elif Input.is_action_just_pressed("ui_special_skill"):
+			state_machine.change_to(player.states.SpecialSkill)
 
 
 func _on_coyote_idle_timeout() -> void:

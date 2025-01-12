@@ -6,6 +6,8 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is MainCharacter:
 		$AnimatedSprite2D.play("off")
 		$SCollectPoint.play()
+		if GLOBAL.game_data["score"] >= 7:
+			GLOBAL.final_bueno = true
 		hud.update_gems(1)
 		##pte puntos
 

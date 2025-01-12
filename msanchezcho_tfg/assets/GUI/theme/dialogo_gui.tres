@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ce8leaiyqewdx"]
+
+[ext_resource type="FontFile" uid="uid://co151lwkhltk7" path="res://assets/GUI/theme/Fredoka_SemiCondensed-SemiBold.ttf" id="1_qmu2y"]
+
+[resource]
+default_font = ExtResource("1_qmu2y")
+default_font_size = 14

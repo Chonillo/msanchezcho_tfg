@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cf28uxje0ej6"]
 
-[ext_resource type="Theme" uid="uid://d0wwhalvdfjfj" path="res://assets/GUI/theme/new_theme.tres" id="1_ndxrs"]
+[ext_resource type="Theme" uid="uid://d0wwhalvdfjfj" path="res://assets/GUI/theme/gui_theme.tres" id="1_ndxrs"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="1_wecxc"]
 [ext_resource type="Texture2D" uid="uid://bj8gdfafhgu5i" path="res://assets/GUI/corazon_vidas.png" id="2_mqtxo"]
 [ext_resource type="Texture2D" uid="uid://dgob566npv3io" path="res://assets/Efectos/gem3/0001.png" id="3_qwl1p"]
@@ -169,7 +169,6 @@ offset_left = 552.0
 offset_top = 14.0
 offset_right = 584.0
 offset_bottom = 46.0
-scale = Vector2(1.04341, 1.04341)
 size_flags_vertical = 4
 texture = ExtResource("2_mqtxo")
 
@@ -178,7 +177,6 @@ offset_left = 588.0
 offset_top = 14.0
 offset_right = 620.0
 offset_bottom = 46.0
-scale = Vector2(1.04341, 1.04341)
 size_flags_vertical = 4
 texture = ExtResource("2_mqtxo")
 
@@ -220,6 +218,25 @@ offset_right = 646.0
 offset_bottom = 363.0
 color = Color(0.752941, 0, 0, 1)
 
+[node name="bReiniciar" type="Button" parent="GameOver"]
+layout_mode = 2
+offset_left = 207.0
+offset_top = 213.0
+offset_right = 293.0
+offset_bottom = 265.0
+size_flags_horizontal = 4
+theme = ExtResource("1_ndxrs")
+text = "Reiniciar"
+
+[node name="bExit" type="Button" parent="GameOver"]
+layout_mode = 2
+offset_left = 301.0
+offset_top = 214.0
+offset_right = 440.0
+offset_bottom = 266.0
+theme = ExtResource("1_ndxrs")
+text = "Salir del juego"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
 layout_mode = 1
 anchors_preset = 8
@@ -227,10 +244,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -141.0
-offset_top = -25.5
-offset_right = 141.0
-offset_bottom = 25.5
+offset_left = -140.0
+offset_top = -67.5
+offset_right = 142.0
+offset_bottom = 59.5
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -242,19 +259,5 @@ theme = ExtResource("1_ndxrs")
 text = "HAS MUERTO"
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
-
-[node name="bReiniciar" type="Button" parent="GameOver/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Reiniciar"
-
-[node name="bExit" type="Button" parent="GameOver/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Salir del juego"
-
-[connection signal="pressed" from="GameOver/VBoxContainer/HBoxContainer/bReiniciar" to="." method="_on_b_reiniciar_pressed"]
-[connection signal="pressed" from="GameOver/VBoxContainer/HBoxContainer/bExit" to="." method="_on_b_exit_pressed"]
+[connection signal="pressed" from="GameOver/bReiniciar" to="." method="_on_b_reiniciar_pressed"]
+[connection signal="pressed" from="GameOver/bExit" to="." method="_on_b_exit_pressed"]

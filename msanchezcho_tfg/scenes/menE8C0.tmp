@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=3 uid="uid://hecnj2yurja2"]
+
+[ext_resource type="Theme" uid="uid://d0wwhalvdfjfj" path="res://assets/GUI/theme/gui_theme.tres" id="1_ctglb"]
+[ext_resource type="Texture2D" uid="uid://bvtpc5d5ks6h" path="res://assets/GUI/Inicio/pantalla inicio2.png" id="2_cy18v"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="2_k570j"]
+[ext_resource type="Texture2D" uid="uid://c2cuwe6k72t4q" path="res://assets/GUI/Inicio/logo.png" id="4_vgw1w"]
+[ext_resource type="AudioStream" uid="uid://bs5kqgd6o5xpv" path="res://assets/Sounds/music/Of Far Different Nature - Just Do It Inicio (CC-BY).ogg" id="5_luyuk"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ctglb")
+script = ExtResource("2_k570j")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cy18v")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.4
+anchor_bottom = 0.711
+offset_left = 9.0
+offset_top = 88.0
+offset_right = -120.0
+offset_bottom = -40.96
+texture = ExtResource("4_vgw1w")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 20
+text = "trabajo final de grado
+michael sánchez chonillo - uoc"
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 268.0
+offset_top = 287.0
+offset_right = -81.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+text = "Flechas: Moverse
+Espacio: saltar
+\"Z\": Habilidad especial
+\"X\": Cambiar Personaje"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 176.0
+offset_right = 166.0
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1, 1.1)
+alignment = 1
+
+[node name="Jugar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Jugar"
+
+[node name="Salir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+text = "salir"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_luyuk")
+volume_db = -8.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="pressed" from="VBoxContainer/Jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]
